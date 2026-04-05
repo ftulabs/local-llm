@@ -1,0 +1,16 @@
+[Unit]
+Description=Qwen3.5-4B LLM Server (TurboQuant + llama.cpp)
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=minh
+WorkingDirectory=/home/minh/Desktop/local-llm
+ExecStart=/home/minh/Desktop/local-llm/llama-server-start.sh
+Restart=on-failure
+RestartSec=5
+Environment=CUDA_VISIBLE_DEVICES=0
+
+[Install]
+WantedBy=multi-user.target
