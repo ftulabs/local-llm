@@ -1,0 +1,4 @@
+openai>=2.0
+ddgs>=9.0
+chromadb>=1.0
+huggingface-hub>=1.0

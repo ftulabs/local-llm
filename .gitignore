@@ -5,3 +5,4 @@ turboquant/
 __pycache__/
 *.pyc
 build/
+rag_db/

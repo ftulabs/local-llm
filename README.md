@@ -160,6 +160,62 @@ Adjust `CMAKE_CUDA_ARCHITECTURES` when building:
 | RTX 40xx | 8.9 | `89` |
 | Jetson Xavier | 7.2 | `72` |
 
+## Agent with Tools (Search + RAG)
+
+A lightweight Python agent that adds web search and document RAG to the LLM server.
+
+### Install agent dependencies
+
+```bash
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Usage
+
+```bash
+source venv/bin/activate
+
+# Interactive mode
+python agent.py
+
+# Single query
+python agent.py "Search for the latest news about AI"
+
+# Verbose mode (shows tool calls)
+python agent.py -v "What is the population of Japan?"
+```
+
+### Available tools
+
+| Tool | Description |
+|------|-------------|
+| `web_search` | Search the web via DuckDuckGo (no API key needed) |
+| `rag_search` | Search ingested documents using ChromaDB + all-MiniLM-L6-v2 embeddings |
+| `rag_ingest` | Add text files to the knowledge base |
+
+### Ingest documents
+
+```bash
+# Via CLI shortcut (interactive mode)
+python agent.py
+You: /ingest /path/to/document.txt
+
+# Or ask the agent
+python agent.py "Ingest the file /path/to/my_notes.txt into the knowledge base"
+
+# Then query
+python agent.py "What does the document say about X?"
+```
+
+### Custom server URL
+
+```bash
+python agent.py --url http://192.168.1.100:8899/v1 "Hello"
+```
+
+The RAG database is stored in `rag_db/` and persists between sessions.
+
 ## References
 
 - [TurboQuant paper (ICLR 2026)](https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/)
