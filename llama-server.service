@@ -1,5 +1,5 @@
 [Unit]
-Description=Qwen3.5-4B LLM Server (TurboQuant + llama.cpp)
+Description=Qwen3.5-4B LLM Server (TurboQuant + llama.cpp, optimized)
 After=network-online.target tailscaled.service
 Wants=network-online.target
 Requires=tailscaled.service
@@ -13,6 +13,8 @@ ExecStart=/home/minh/Desktop/local-llm/llama-server-start.sh
 Restart=on-failure
 RestartSec=5
 Environment=CUDA_VISIBLE_DEVICES=0
+LimitMEMLOCK=infinity
+LimitNOFILE=65536
 
 [Install]
 WantedBy=multi-user.target
